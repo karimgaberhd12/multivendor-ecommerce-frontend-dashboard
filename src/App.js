@@ -1,11 +1,17 @@
-/* eslint-disable no-unused-vars */
-import { useState } from "react";
-import "./App.css";
-import Router from "./router/Router.jsx";
-import publicRoutes from "./router/routes/publicRoutes.js";
+import { useEffect, useState } from "react";
+import Router from "./router/Router";
+import publicRoutes from "./router/routes/publicRoutes";
+import { getRoutes } from "./router/routes";
 
 function App() {
   const [allRoutes, setAllRoutes] = useState([...publicRoutes]);
+  // console.log(allRoutes)
+
+  useEffect(() => {
+    const routes = getRoutes();
+    setAllRoutes([...allRoutes, routes]);
+  }, []);
+
   return <Router allRoutes={allRoutes} />;
 }
 
